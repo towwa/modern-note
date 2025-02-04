@@ -44,6 +44,28 @@ npx prisma migrate dev --name init
 npm run dev
 ```
 
+## Docker Setup
+
+The application can be run locally using Docker Compose with PostgreSQL:
+
+```bash
+docker-compose up --build
+```
+
+The application will be available at http://localhost:3001
+
+### Environment Variables
+
+Create a `.env` file with the following variables:
+
+```bash
+DATABASE_URL="postgres://postgres:postgres@localhost:5432/modernnotes"
+```
+
+## PostgreSQL Migration
+
+The application has been migrated from SQLite to PostgreSQL. The database schema remains the same.
+
 ## Deployment
 
 ### Prerequisites

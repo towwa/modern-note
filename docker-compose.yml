@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: modern-notes-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: modernnotes
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    container_name: modern-notes-app
+    build: .
+    ports:
+      - "3001:3000"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/modernnotes
+      - NODE_ENV=production
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    command: npm run dev
+
+volumes:
+  postgres_data:
