@@ -44,6 +44,32 @@ npx prisma migrate dev --name init
 npm run dev
 ```
 
+## Deployment
+
+### Prerequisites
+
+- GitHub repository
+- Fly.io account
+- Docker installed
+
+### Steps
+
+1. Push code to GitHub main branch
+2. Set up secrets in GitHub repository (Settings → Secrets and variables → Actions):
+   - `DATABASE_URL`: Your production database connection string
+   - `FLY_API_TOKEN`: Your Fly.io API token (get from `flyctl auth token`)
+3. The CI/CD pipeline will automatically:
+   - Run tests
+   - Build the application
+   - Deploy to Fly.io
+
+### Manual Deployment
+
+```bash
+flyctl launch
+flyctl deploy
+```
+
 ## Project Structure
 
 ```bash
